@@ -1,21 +1,279 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#14532d" />
-    <meta name="description" content="MapOut — campus map with GPS trails, pins, and graph nodes." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <title>MapOut</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>LAUS DEO '26 — NUAS Choir KNUST · 15th Anniversary</title>
+
+<link rel="icon" href="NuasChoirLogo.png">
+<link rel="stylesheet" href="lausdeo.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+/* ===== HERO SLIDESHOW ===== */
+
+#hero{
+  position:relative;
+  overflow:hidden;
+  min-height:100vh;
+}
+
+/* slideshow container */
+.hero-slideshow{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+}
+
+/* each slide */
+.hero-slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center 30%;
+  opacity:0;
+  transform:scale(1.05);
+  transition:opacity 1.8s ease-in-out, transform 6s ease;
+  filter:saturate(1.05) contrast(1.1);
+}
+
+/* active slide */
+.hero-slide.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* overlay */
+.hero-slideshow::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 50% 0%,
+      rgba(10,40,90,.15) 0%,
+      rgba(20,20,60,.25) 55%,
+      rgba(42,4,16,.40) 100%),
+    linear-gradient(180deg,
+      rgba(10,25,70,.18) 0%,
+      rgba(42,4,16,.25) 60%,
+      rgba(242,235,217,.88) 100%);
+  z-index:1;
+}
+
+.hero-slideshow::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, rgba(239,175,0,.16) 0%, transparent 45%, rgba(239,175,0,.10) 100%);
+  mix-blend-mode:overlay;
+  z-index:2;
+}
+
+/* ensure content is above slideshow */
+#hero > *:not(.hero-slideshow){
+  position:relative;
+  z-index:2;
+}
+
+.hero-caption{
+  position:absolute;
+  bottom:120px;
+  right:40px;
+  z-index:3;
+  color:white;
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;
+  letter-spacing:.08em;
+  background:rgba(0,0,0,.25);
+  padding:10px 16px;
+  border-radius:10px;
+  backdrop-filter: blur(6px);
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .hero-slide{
+    transition:none;
+    transform:none;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-brand">
+    <img src="NuasChoirLogo.png" class="nav-logo rounded-circle" style="border:1.8px solid rgba(239,175,0,0.5)">
+    <div class="nav-brand-text">
+      <div class="nav-brand-name">NUAS CHOIR · KNUST</div>
+      <div class="nav-brand-sub">15th Anniversary Celebration</div>
+    </div>
+  </a>
+
+  <button id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="program.html">Program</a></li>
+    <li><a href="repertoire.html">Repertoire</a></li>
+    <li><a href="history.html">History</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+
+  <!-- SLIDESHOW -->
+  <div class="hero-slideshow" aria-hidden="true">
+
+    <div class="hero-slide active"
+      style="background-image:url('https://res.cloudinary.com/doxkrnkkz/image/upload/q_auto,f_auto/v1781868533/WhatsApp_Image_2026-06-18_at_18.31.07_9_kvxbj2.jpg')">
+    </div>
+
+    <div class="hero-slide"
+      style="background-image:url('https://res.cloudinary.com/doxkrnkkz/image/upload/q_auto,f_auto/v1781868534/WhatsApp_Image_2026-06-18_at_18.30.30_2_yzf28k.jpg')">
+    </div>
+
+    <div class="hero-slide"
+      style="background-image:url('https://res.cloudinary.com/doxkrnkkz/image/upload/q_auto,f_auto/v1781868534/WhatsApp_Image_2026-06-18_at_18.30.30_1_tol0e2.jpg')">
+    </div>
+
+    <div class="hero-slide"
+      style="background-image:url('https://res.cloudinary.com/doxkrnkkz/image/upload/q_auto,f_auto/v1781868535/WhatsApp_Image_2026-06-18_at_18.30.30_r24yfa.jpg')">
+    </div>
+
+    <div class="hero-slide"
+      style="background-image:url('https://res.cloudinary.com/doxkrnkkz/image/upload/q_auto,f_auto/v1781534965/6048706841186865018_lslwac.jpg')">
+    </div>
+
+    <div class="hero-slide"
+      style="background-image:url('https://res.cloudinary.com/doxkrnkkz/image/upload/q_auto,f_auto/v1780610527/IMG_6230_vpjpb6.jpg')">
+    </div>
+
+  </div>
+
+  <!-- OPTIONAL CAPTION -->
+  <div class="hero-caption" id="heroCaption"></div>
+
+  <!-- HERO CONTENT -->
+  <div style="position:relative;text-align:center;width:100%;max-width:1000px">
+
+    <div class="hero-kicker">
+      <span class="hero-kicker-line"></span>
+      A MILESTONE FIFTEEN YEARS IN THE MAKING
+      <span class="hero-kicker-line"></span>
+    </div>
+
+    <div class="hero-concert-name">LAUS DEO</div>
+    <div class="hero-year-tag">'26</div>
+
+    <p class="hero-sub">
+      15 Years in Retrospect : Celebrating the Goodness of God
+    </p>
+
+    <div id="countdown"></div>
+
+    <div class="hero-cta-row">
+      <a href="program.html" class="btn-primary">VIEW PROGRAM</a>
+      <a href="history.html" class="btn-outline">OUR STORY</a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER (unchanged) -->
+<footer>
+  <!-- keep your existing footer exactly as you had it -->
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+/* NAV */
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+const navEl = document.getElementById('nav');
+
+navToggle.addEventListener('click', () => {
+  const isOpen = navEl.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', isOpen);
+});
+
+/* SLIDESHOW ENGINE */
+const slides = document.querySelectorAll('.hero-slide');
+const captions = [
+  "The Beginning — 2013",
+  "Growing in Grace",
+  "Voices United in Worship",
+  "Laus Deo Journey",
+  "Laus Deo '24 Memories",
+  "Preparing for '26 Celebration"
+];
+
+let current = 0;
+const captionBox = document.getElementById("heroCaption");
+
+function showSlide(index){
+  slides.forEach(s => s.classList.remove('active'));
+  slides[index].classList.add('active');
+
+  if(captionBox){
+    captionBox.textContent = captions[index] || "";
+  }
+}
+
+function nextSlide(){
+  current = (current + 1) % slides.length;
+  showSlide(current);
+}
+
+showSlide(0);
+setInterval(nextSlide, 6000);
+
+/* COUNTDOWN */
+const eventDate = new Date("June 27, 2026 17:00:00").getTime();
+
+function tick(){
+  const now = Date.now();
+  const d = eventDate - now;
+
+  if(d < 0){
+    document.getElementById('countdown').innerHTML =
+    "<div style='color:gold'>THE CONCERT HAS BEGUN ✦</div>";
+    return;
+  }
+
+  const days = Math.floor(d/(1000*60*60*24));
+  const hours = Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const mins = Math.floor((d%(1000*60*60))/(1000*60));
+  const secs = Math.floor((d%(1000*60))/1000);
+
+  document.getElementById('countdown').innerHTML = `
+    <div>
+      <div>${days} Days ${hours} Hrs ${mins} Min ${secs} Sec</div>
+    </div>
+  `;
+}
+
+tick();
+setInterval(tick, 1000);
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>
